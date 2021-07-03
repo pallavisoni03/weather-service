@@ -1,4 +1,4 @@
-package com.travel.weatherservice;
+package com.travel.weather;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

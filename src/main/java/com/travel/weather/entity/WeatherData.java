@@ -1,4 +1,4 @@
-package com.travel.weatherservice.entity;
+package com.travel.weather.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
