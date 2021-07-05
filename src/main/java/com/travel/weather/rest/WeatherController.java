@@ -1,18 +1,19 @@
 package com.travel.weather.rest;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.travel.weather.entity.WeatherData;
-import com.travel.weather.repository.WeatherRepository;
+import com.travel.weather.dto.WeatherDataDTO;
 import com.travel.weather.service.WeatherService;
 
 @RestController
@@ -27,31 +28,27 @@ public class WeatherController {
 	
 	/* Returning either all data or a specific record based on the filter */
 	@GetMapping("/weather")
-	List<WeatherData> getWeatherData(@RequestParam(required = false) String date) {
-		
-			return weatherService.getWeatherDataService(date);
+	List<WeatherDataDTO> getWeatherData(@RequestParam(required = false) String date) {
+		return weatherService.getWeatherDataService(date);
 	}
 
 	/* adding new data */
 	@PostMapping("/weather")
-	void saveWeatherData(@RequestBody WeatherData weatherDataEntity) {
-		weatherService.saveWeatherDataService(weatherDataEntity);
+	void saveWeatherData(@RequestBody WeatherDataDTO weatherDataDTO) throws ParseException{
+		weatherService.saveWeatherDataService(weatherDataDTO);
 		
 	}
 
 	@PostMapping("/weather/bulk")
-	void saveWeatherDataBulk(@RequestBody List<WeatherData> weatherDataEntities) {
-		weatherService.saveWeatherDataBulkService(weatherDataEntities);
+	void saveWeatherDataBulk(@RequestBody List<WeatherDataDTO> weatherDataDTOs) throws ParseException {
+		weatherService.saveWeatherDataBulkService(weatherDataDTOs);
 
 	}
-
-	/* get data by date */
-	// @GetMapping("/weather1?date={date}")
-	// WeatherData recByDate(@PathVariable String date) {
-	// @GetMapping("/weather/{d}")
-	/*
-	 * @GetMapping("/weather?") WeatherData recByDate(@RequestParam String d) {
-	 * logger.info("Value=========={}", d); return repository.findByDate(d); }
-	 */
+	
+	@DeleteMapping("/erase")
+	void eraseWeatherDataBulk() {
+		weatherService.eraseWeatherDataService();
+	}
+	
 
 }
