@@ -3,8 +3,11 @@ package com.travel.weather.service;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,8 @@ import com.travel.weather.repository.WeatherRepository;
 
 @Service
 public class WeatherService {
+	
+	private Logger logger = LoggerFactory.getLogger(WeatherService.class);
 	
 	@Autowired
 	private WeatherRepository repository;
@@ -35,6 +40,7 @@ public class WeatherService {
 	}
 	
 	public List<WeatherDataDTO> getWeatherDataService(String date){
+		logger.info("method=GET, params=date={}", date);
 		List<WeatherDataDTO> weatherDataDTOs   = new ArrayList<WeatherDataDTO>();
 		if ((date != null) && (date.length() > 0)) {
 			for(WeatherDataEntity weatherDataEntity : repository.findAllByDate(date)) {
@@ -51,6 +57,19 @@ public class WeatherService {
 			}
 		}
 		return weatherDataDTOs;
+	}
+	
+	public WeatherDataDTO getWeatherDataServiceByID(long id){
+		WeatherDataDTO weatherDataDTO = null;
+		
+		Optional<WeatherDataEntity> weatherDataEntity = 
+				repository.findById(id);
+		
+		if (weatherDataEntity.isPresent()) {
+			 weatherDataDTO = convertToDto(weatherDataEntity.get());
+		}
+	  
+		return weatherDataDTO; 
 	}
 	
 	public void eraseWeatherDataService(){

@@ -1,5 +1,6 @@
 package com.travel.weather.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,8 @@ public class LocationDataEntity {
 	private @Id @GeneratedValue Long id;
 	
 	@OneToOne
-	@JoinColumn(name = "weatherDataEntity_id")
+	@JoinColumn(name = "weatherDataEntity_id", referencedColumnName = "id")
+	//@OneToOne(cascade = CascadeType.ALL)
 	private WeatherDataEntity weatherDataEntity;
 	
 	private String lat;

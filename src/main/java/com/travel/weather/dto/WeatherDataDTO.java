@@ -1,12 +1,14 @@
 package com.travel.weather.dto;
 
-import com.travel.weather.entity.LocationDataEntity;
+import java.util.List;
 
 public class WeatherDataDTO {
 
 	private Long id;
 	private String date;
-	private LocationDataEntity location;
+	private LocationDataDTO location;
+	
+	private List<Float> temperature;
 	
 	
 	public Long getId() {
@@ -21,11 +23,18 @@ public class WeatherDataDTO {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public LocationDataEntity getLocation() {
+	public LocationDataDTO getLocation() {
 		return location;
 	}
-	public void setLocation(LocationDataEntity location) {
+	public void setLocation(LocationDataDTO location) {
 		this.location = location;
-	} 
+	}
+	public List<Float> getTemperature() {
+		return temperature;
+	}
+	public void setTemperature(List<Float> temperature) {
+		this.temperature = temperature;
+	}
+	
 	
 }
