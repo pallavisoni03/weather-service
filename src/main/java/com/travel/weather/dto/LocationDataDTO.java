@@ -1,23 +1,24 @@
 package com.travel.weather.dto;
 
 public class LocationDataDTO {
-	private String lat;
-	private String lon;
+	private float lat;
+	private float lon;
 	private String city;
 	private String state;
 	
-	public String getLat() {
+	public float getLat() {
 		return lat;
 	}
-	public void setLat(String lat) {
+	public void setLat(float lat) {
 		this.lat = lat;
 	}
-	public String getLon() {
+	public float getLon() {
 		return lon;
 	}
-	public void setLon(String lon) {
+	public void setLon(float lon) {
 		this.lon = lon;
 	}
+	
 	public String getCity() {
 		return city;
 	}
@@ -30,5 +31,6 @@ public class LocationDataDTO {
 	public void setState(String state) {
 		this.state = state;
 	}
+	
 
 }

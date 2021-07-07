@@ -1,8 +1,6 @@
 package com.travel.weather.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,12 +12,11 @@ public class LocationDataEntity {
 	private @Id @GeneratedValue Long id;
 	
 	@OneToOne
-	@JoinColumn(name = "weatherDataEntity_id", referencedColumnName = "id")
-	//@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id", referencedColumnName = "id")
 	private WeatherDataEntity weatherDataEntity;
 	
-	private String lat;
-	private String lon;
+	private float lat;
+	private float lon;
 	private String city;
 	private String state;
 	
@@ -30,18 +27,6 @@ public class LocationDataEntity {
 		this.id = id;
 	}
 	
-	public String getLat() {
-		return lat;
-	}
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-	public String getLon() {
-		return lon;
-	}
-	public void setLon(String lon) {
-		this.lon = lon;
-	}
 	public String getCity() {
 		return city;
 	}
@@ -53,6 +38,18 @@ public class LocationDataEntity {
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	public float getLat() {
+		return lat;
+	}
+	public void setLat(float lat) {
+		this.lat = lat;
+	}
+	public float getLon() {
+		return lon;
+	}
+	public void setLon(float lon) {
+		this.lon = lon;
 	}
 
 }

@@ -5,11 +5,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+
 
 @Entity
 
@@ -18,10 +16,9 @@ public class WeatherDataEntity {
 	private @Id Long id;
 	private String date; 
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	@JoinColumn(name = "locationData")
+	@OneToOne(mappedBy = "weatherDataEntity", cascade = CascadeType.ALL)
 	private LocationDataEntity location;
+
 	@ElementCollection
 	private List<Float> temperature;
 	

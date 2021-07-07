@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.travel.weather.dto.WeatherDataDTO;
 import com.travel.weather.service.WeatherService;
@@ -27,56 +26,68 @@ import com.travel.weather.util.CommonUtil;
 public class WeatherController {
 
 	private Logger logger = LoggerFactory.getLogger(WeatherController.class);
-	
+
 	@Autowired
 	private WeatherService weatherService;
-	
-	
-	/* Returning either all data or a specific record based on the filter */
+
+
+	/**
+	 *  Returning either all data or a specific record based on the filter 
+	 */
 	@GetMapping("/weather")
-	List<WeatherDataDTO> getWeatherData(@RequestParam(required = false) String date) {
-		//TODO
-		// put date validation here
-		return weatherService.getWeatherDataService(date);
+	ResponseEntity<?> getWeatherData(@RequestParam(required = false) String date) {
+		try {
+			// Considering a scenario to get all data where date param is null
+			if(date!=null) {
+				logger.info("message=Validating date to get the data");
+				CommonUtil.validateWeatherDate(date);
+			}
+		}catch(Exception e) {
+			logger.error("message=Invalid data", e);
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		List<WeatherDataDTO> weatherDataDTOs = weatherService.getWeatherDataService(date);
+		return ResponseEntity.ok(weatherDataDTOs);
+
 	}
-	
+
 	/* getting data by ID */
 	@GetMapping("/weather/{id}")
 	WeatherDataDTO getWeatherDataByID(@PathVariable(required = true) long id) {
 		//TODO
 		// put null validation here
-		return weatherService.getWeatherDataServiceByID(id);
+		return weatherService.getWeatherDataById(id);
 	}
 
 	/* adding new data */
 	@PostMapping("/weather")
 	ResponseEntity<String> saveWeatherData(@RequestBody WeatherDataDTO weatherDataDTO) throws ParseException{
-		if(!CommonUtil.validateDateFormat(weatherDataDTO.getDate())) {
-			return new ResponseEntity<>("Invalid date", HttpStatus.BAD_REQUEST);
-		}else {
-			weatherService.saveWeatherDataService(weatherDataDTO);
-			//TODO
-			//Create resource location
-	        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-	                                    .path("/{id}")
-	                                    .buildAndExpand(weatherDataDTO.getId())
-	                                    .toUri();
-	        logger.info("method=POST, new_resource_location={}", location); 
-			return ResponseEntity.created(location).build();
+		//TODO
+		// check which exception to catch
+		try {
+			CommonUtil.validateWeatherDataInput(weatherDataDTO);
+		}catch(Exception e) {
+			logger.error("message=Invalid data", e);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		
+		boolean saveFlag = weatherService.saveWeatherDataService(weatherDataDTO);
+		if(saveFlag) {
+			URI location = CommonUtil.buildUriLocation("/{id}", weatherDataDTO.getId());
+			logger.info("method=POST, new_resource_location={}", location); 
+			return ResponseEntity.created(location).build();
+		}else {
+			return new ResponseEntity<>("Id already exixts",HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@PostMapping("/weather/bulk")
 	void saveWeatherDataBulk(@RequestBody List<WeatherDataDTO> weatherDataDTOs) throws ParseException {
 		weatherService.saveWeatherDataBulkService(weatherDataDTOs);
-
 	}
-	
+
 	@DeleteMapping("/erase")
 	void eraseWeatherDataBulk() {
 		weatherService.eraseWeatherDataService();
 	}
-	
 
 }
