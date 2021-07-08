@@ -35,11 +35,13 @@ public class WeatherService {
 		repository.save(weatherDataEntity);
 		return true;
 	}
- //TODO 
-// change this method for new request
+
 	public void saveWeatherDataBulkService(List<WeatherDataDTO> weatherDataDTOs) throws ParseException {
-		List<WeatherDataEntity> weatherDataEntities = CommonUtil.convertToEntityList(weatherDataDTOs);
-		repository.saveAll(weatherDataEntities);
+		if (weatherDataDTOs != null) {
+			for (WeatherDataDTO weatherDataDTO: weatherDataDTOs) {
+				saveWeatherDataService(weatherDataDTO);
+			}
+		}
 	}
 	
 	public List<WeatherDataDTO> getWeatherDataService(String date){

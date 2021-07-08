@@ -11,8 +11,7 @@ public class LocationDataEntity {
 	
 	private @Id @GeneratedValue Long id;
 	
-	@OneToOne
-	@JoinColumn(name = "id", referencedColumnName = "id")
+	@OneToOne(mappedBy = "location")
 	private WeatherDataEntity weatherDataEntity;
 	
 	private float lat;

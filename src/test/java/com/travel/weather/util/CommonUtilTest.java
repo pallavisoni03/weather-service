@@ -1,4 +1,4 @@
-package com.travel.weatherservice;
+package com.travel.weather.util;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import com.travel.weather.entity.WeatherDataEntity;
 import com.travel.weather.util.CommonUtil;
 
 
-class WeatherServiceApplicationTests {
+class CommonUtilTest {
 	
 	@Test
 	public void testForInvalidDate() {
@@ -20,15 +20,6 @@ class WeatherServiceApplicationTests {
 					}, "Exception should be thrown for invalid date"
 				);
 	}
-	
-	/*
-	 * @Test public void testForInvalidDate2() {
-	 * Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
-	 * 
-	 * @Override public void execute() throws Throwable {
-	 * CommonUtil.validateWeatherDate("2021-84-06"); } },
-	 * "Exception should be thrown for invalid date" ); }
-	 */
 	
 	@Test
 	public void testForDtoToEntityConversion() {
