@@ -27,13 +27,13 @@ public class WeatherService {
 	
 	public boolean saveWeatherDataService(WeatherDataDTO weatherDataDTO) throws ParseException {
 		if(repository.existsById(weatherDataDTO.getId())) {
-			logger.info("message=No saveing the data, ID already exists");
+			logger.info("message=Not saving the data, ID already exists");
 			return false;
 		}
 		WeatherDataEntity weatherDataEntity = CommonUtil.convertToEntity(weatherDataDTO);
 		logger.info("message=Saving all data");
 		repository.save(weatherDataEntity);
-			return true;
+		return true;
 	}
  //TODO 
 // change this method for new request
