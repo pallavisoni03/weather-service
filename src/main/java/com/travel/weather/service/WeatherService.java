@@ -16,7 +16,7 @@ import com.travel.weather.entity.WeatherDataEntity;
 import com.travel.weather.repository.WeatherRepository;
 import com.travel.weather.util.CommonUtil;
 
-/* 
+/**
  * This class represents all the business logic
  */
 @Service
@@ -28,7 +28,7 @@ public class WeatherService {
 	@Autowired
 	private WeatherRepository repository;
 	
-	/* 
+	/**
 	 * Adding new data 
 	 */
 	public boolean saveWeatherDataService(WeatherDataDTO weatherDataDTO) throws ParseException {
@@ -42,7 +42,7 @@ public class WeatherService {
 		return true;
 	}
 
-	/* 
+	/**
 	 * Adding new data in bulk, for testing
 	 */
 	public void saveWeatherDataBulkService(List<WeatherDataDTO> weatherDataDTOs) throws ParseException {
@@ -84,7 +84,7 @@ public class WeatherService {
 		return weatherDataDTO; 
 	}
 	
-	/* 
+	/**
 	 * Erasing all data
 	 */
 	public void eraseWeatherDataService(){

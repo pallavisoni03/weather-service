@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-/* 
+/**
  * This entity represents the location data table in database
  */
 @Entity

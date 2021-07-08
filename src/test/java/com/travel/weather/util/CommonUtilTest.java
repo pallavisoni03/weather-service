@@ -2,19 +2,17 @@ package com.travel.weather.util;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.travel.weather.dto.WeatherDataDTO;
 import com.travel.weather.entity.WeatherDataEntity;
-import com.travel.weather.util.CommonUtil;
 
-/* 
+
+/**
  * This class is used for unit testing 
  */
 class CommonUtilTest {
 	
-	/* 
+	/**
 	 * This method contains unit test case for date validation
 	 */
 	@Test
@@ -26,7 +24,7 @@ class CommonUtilTest {
 				);
 	}
 	
-	/* 
+	/**
 	 * This method contains unit test case for mappers
 	 */
 	@Test

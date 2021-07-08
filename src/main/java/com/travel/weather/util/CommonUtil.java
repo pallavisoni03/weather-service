@@ -8,22 +8,20 @@ import java.util.List;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.validator.GenericValidator;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.travel.weather.dto.WeatherDataDTO;
 import com.travel.weather.entity.WeatherDataEntity;
-import com.travel.weather.service.WeatherService;
 
-/* 
+
+/**
  * This class contains all the utility methods
  */
 public class CommonUtil {
 
 	private static ModelMapper modelMapper = new ModelMapper();
 	
-	/* 
+	/**
 	 * Validating all the input data 
 	 */
 	public static void validateWeatherDataInput(WeatherDataDTO weatherDataDTO) {
@@ -37,7 +35,7 @@ public class CommonUtil {
 		Validate.inclusiveBetween(-180, 180, weatherDataDTO.getLocation().getLon());
 	}
 	
-	/* 
+	/**
 	 * Validating for valid date 
 	 */
 	public static void validateWeatherDate(String date) {
@@ -47,7 +45,7 @@ public class CommonUtil {
 						date, "yyyy-MM-dd", true), "Invalid Date");
 	}
 
-	/* 
+	/**
 	 * Mapping for Entity with DTO 
 	 */
 	public static WeatherDataDTO convertToDto(WeatherDataEntity weatherDataEntity) {
@@ -55,7 +53,7 @@ public class CommonUtil {
 		return weatherDataDTO;
 	}
 
-	/* 
+	/**
 	 * Mapping for Entity with DTO 
 	 */
 	public static WeatherDataEntity convertToEntity(WeatherDataDTO weatherDataDTO) {
@@ -63,7 +61,7 @@ public class CommonUtil {
 		return weatherDataEntity;
 	}
 	
-	/* 
+	/**
 	 * Mapping for Entity list with DTO list
 	 */
 	public static List<WeatherDataDTO> convertToDtoList(List<WeatherDataEntity> weatherDataEntities){
@@ -75,7 +73,7 @@ public class CommonUtil {
 		return weatherDataDTOs;		
 	}
 
-	/* 
+	/**
 	 * Mapping for DTO list with Entity list
 	 */
 	public static List<WeatherDataEntity> convertToEntityList(List<WeatherDataDTO> weatherDataDTOs) throws ParseException{
@@ -87,7 +85,7 @@ public class CommonUtil {
 		return weatherDataEntities;	
 	}
 
-	/* 
+	/**
 	 * Building location to get reference of created data 
 	 */
 	public static URI buildUriLocation(String paramName, Long idObject) {

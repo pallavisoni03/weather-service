@@ -64,7 +64,7 @@ public class WeatherController {
 		return weatherService.getWeatherDataById(id);
 	}
 
-	/* 
+	/**
 	 * Adding new data 
 	 */
 	@PostMapping("/weather")
@@ -87,7 +87,7 @@ public class WeatherController {
 		}
 	}
 
-	/* 
+	/**
 	 * Adding new data in bulk, for testing
 	 */
 	@PostMapping("/weather/bulk")
@@ -95,7 +95,7 @@ public class WeatherController {
 		weatherService.saveWeatherDataBulkService(weatherDataDTOs);
 	}
 
-	/* 
+	/**
 	 * Erasing all data
 	 */
 	@DeleteMapping("/erase")

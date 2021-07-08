@@ -2,7 +2,7 @@ package com.travel.weather.dto;
 
 import java.util.List;
 
-/* 
+/**
  * This Data Transfer Object represents the Weather data, exposed over REST end points 
  */
 public class WeatherDataDTO {

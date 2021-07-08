@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.travel.weather.util.TestUtil;
 
-/* 
+/**
  * This class is used for end to end integration testing 
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -34,7 +34,7 @@ public class WebApplicationTest {
 
 	private static final ObjectMapper mapper = new ObjectMapper();
 
-	/* 
+	/**
 	 * This method contains all the scenarios for integration testing
 	 */
 	@Test
