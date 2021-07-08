@@ -1,5 +1,8 @@
 package com.travel.weather.dto;
 
+/* 
+ * This Data Transfer Object represents the Location data, exposed over REST end points 
+ */
 public class LocationDataDTO {
 	private float lat;
 	private float lon;

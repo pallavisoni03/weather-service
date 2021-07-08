@@ -16,6 +16,9 @@ import com.travel.weather.entity.WeatherDataEntity;
 import com.travel.weather.repository.WeatherRepository;
 import com.travel.weather.util.CommonUtil;
 
+/* 
+ * This class represents all the business logic
+ */
 @Service
 public class WeatherService {
 	
@@ -25,6 +28,9 @@ public class WeatherService {
 	@Autowired
 	private WeatherRepository repository;
 	
+	/* 
+	 * Adding new data 
+	 */
 	public boolean saveWeatherDataService(WeatherDataDTO weatherDataDTO) throws ParseException {
 		if(repository.existsById(weatherDataDTO.getId())) {
 			logger.info("message=Not saving the data, ID already exists");
@@ -36,6 +42,9 @@ public class WeatherService {
 		return true;
 	}
 
+	/* 
+	 * Adding new data in bulk, for testing
+	 */
 	public void saveWeatherDataBulkService(List<WeatherDataDTO> weatherDataDTOs) throws ParseException {
 		if (weatherDataDTOs != null) {
 			for (WeatherDataDTO weatherDataDTO: weatherDataDTOs) {
@@ -44,6 +53,9 @@ public class WeatherService {
 		}
 	}
 	
+	/**
+	 *  Returning either all data or a specific record based on the date filter 
+	 */
 	public List<WeatherDataDTO> getWeatherDataService(String date){
 		
 		List<WeatherDataDTO> weatherDataDTOs   = new ArrayList<WeatherDataDTO>();
@@ -57,6 +69,9 @@ public class WeatherService {
 		return weatherDataDTOs;
 	}
 	
+	/**
+	 *  Getting data by ID 
+	 */
 	public WeatherDataDTO getWeatherDataById(long id){
 		logger.info("method=GET, params=id={}", id);
 		WeatherDataDTO weatherDataDTO = null;
@@ -69,6 +84,9 @@ public class WeatherService {
 		return weatherDataDTO; 
 	}
 	
+	/* 
+	 * Erasing all data
+	 */
 	public void eraseWeatherDataService(){
 		logger.info("message=Erasing all");
 		repository.deleteAll();

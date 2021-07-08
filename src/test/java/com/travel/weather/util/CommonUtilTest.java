@@ -9,9 +9,14 @@ import com.travel.weather.dto.WeatherDataDTO;
 import com.travel.weather.entity.WeatherDataEntity;
 import com.travel.weather.util.CommonUtil;
 
-
+/* 
+ * This class is used for unit testing 
+ */
 class CommonUtilTest {
 	
+	/* 
+	 * This method contains unit test case for date validation
+	 */
 	@Test
 	public void testForInvalidDate() {
 		Assertions.assertThrows(IllegalArgumentException.class, 
@@ -21,6 +26,9 @@ class CommonUtilTest {
 				);
 	}
 	
+	/* 
+	 * This method contains unit test case for mappers
+	 */
 	@Test
 	public void testForDtoToEntityConversion() {
 		WeatherDataDTO weatherDataDTO = new WeatherDataDTO();

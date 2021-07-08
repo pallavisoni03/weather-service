@@ -12,6 +12,9 @@ import javax.persistence.OneToOne;
 
 @Entity
 
+/* 
+ * This entity represents the weather data table in database
+ */
 public class WeatherDataEntity {
 	
 	private @Id long id;

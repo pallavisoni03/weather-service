@@ -16,11 +16,16 @@ import com.travel.weather.dto.WeatherDataDTO;
 import com.travel.weather.entity.WeatherDataEntity;
 import com.travel.weather.service.WeatherService;
 
-
+/* 
+ * This class contains all the utility methods
+ */
 public class CommonUtil {
 
 	private static ModelMapper modelMapper = new ModelMapper();
 	
+	/* 
+	 * Validating all the input data 
+	 */
 	public static void validateWeatherDataInput(WeatherDataDTO weatherDataDTO) {
 		validateWeatherDate(weatherDataDTO.getDate());
 		//Ensure ID is not null
@@ -31,7 +36,10 @@ public class CommonUtil {
 		Validate.inclusiveBetween(-90, 90, weatherDataDTO.getLocation().getLat());
 		Validate.inclusiveBetween(-180, 180, weatherDataDTO.getLocation().getLon());
 	}
-
+	
+	/* 
+	 * Validating for valid date 
+	 */
 	public static void validateWeatherDate(String date) {
 
 		Validate.isTrue(
@@ -39,16 +47,25 @@ public class CommonUtil {
 						date, "yyyy-MM-dd", true), "Invalid Date");
 	}
 
+	/* 
+	 * Mapping for Entity with DTO 
+	 */
 	public static WeatherDataDTO convertToDto(WeatherDataEntity weatherDataEntity) {
 		WeatherDataDTO weatherDataDTO = modelMapper.map(weatherDataEntity, WeatherDataDTO.class);
 		return weatherDataDTO;
 	}
 
+	/* 
+	 * Mapping for Entity with DTO 
+	 */
 	public static WeatherDataEntity convertToEntity(WeatherDataDTO weatherDataDTO) {
 		WeatherDataEntity weatherDataEntity = modelMapper.map(weatherDataDTO, WeatherDataEntity.class);
 		return weatherDataEntity;
 	}
-
+	
+	/* 
+	 * Mapping for Entity list with DTO list
+	 */
 	public static List<WeatherDataDTO> convertToDtoList(List<WeatherDataEntity> weatherDataEntities){
 		List<WeatherDataDTO> weatherDataDTOs   = new ArrayList<WeatherDataDTO>();
 		for(WeatherDataEntity weatherDataEntity : weatherDataEntities) {
@@ -58,6 +75,9 @@ public class CommonUtil {
 		return weatherDataDTOs;		
 	}
 
+	/* 
+	 * Mapping for DTO list with Entity list
+	 */
 	public static List<WeatherDataEntity> convertToEntityList(List<WeatherDataDTO> weatherDataDTOs) throws ParseException{
 		List<WeatherDataEntity> weatherDataEntities   = new ArrayList<WeatherDataEntity>();
 		for(WeatherDataDTO weatherDataDTO : weatherDataDTOs) {
@@ -67,6 +87,9 @@ public class CommonUtil {
 		return weatherDataEntities;	
 	}
 
+	/* 
+	 * Building location to get reference of created data 
+	 */
 	public static URI buildUriLocation(String paramName, Long idObject) {
 		//logger.info("message=building URI for, params=paramName={}", paramName, "params=idObject={}", idObject);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()

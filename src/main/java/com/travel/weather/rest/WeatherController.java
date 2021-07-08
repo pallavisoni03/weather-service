@@ -21,8 +21,11 @@ import com.travel.weather.dto.WeatherDataDTO;
 import com.travel.weather.service.WeatherService;
 import com.travel.weather.util.CommonUtil;
 
-@RestController
+/** 
+ * This class represents the RESt end points.
+ */
 
+@RestController
 public class WeatherController {
 
 	private Logger logger = LoggerFactory.getLogger(WeatherController.class);
@@ -32,7 +35,7 @@ public class WeatherController {
 
 
 	/**
-	 *  Returning either all data or a specific record based on the filter 
+	 *  Returning either all data or a specific record based on the date filter 
 	 */
 	@GetMapping("/weather")
 	ResponseEntity<?> getWeatherData(@RequestParam(required = false) String date) {
@@ -51,7 +54,9 @@ public class WeatherController {
 
 	}
 
-	/* getting data by ID */
+	/**
+	 *  Getting data by ID 
+	 */
 	@GetMapping("/weather/{id}")
 	WeatherDataDTO getWeatherDataByID(@PathVariable(required = true) long id) {
 		//TODO
@@ -59,7 +64,9 @@ public class WeatherController {
 		return weatherService.getWeatherDataById(id);
 	}
 
-	/* adding new data */
+	/* 
+	 * Adding new data 
+	 */
 	@PostMapping("/weather")
 	ResponseEntity<String> saveWeatherData(@RequestBody WeatherDataDTO weatherDataDTO) throws ParseException{
 		//TODO
@@ -80,11 +87,17 @@ public class WeatherController {
 		}
 	}
 
+	/* 
+	 * Adding new data in bulk, for testing
+	 */
 	@PostMapping("/weather/bulk")
 	void saveWeatherDataBulk(@RequestBody List<WeatherDataDTO> weatherDataDTOs) throws ParseException {
 		weatherService.saveWeatherDataBulkService(weatherDataDTOs);
 	}
 
+	/* 
+	 * Erasing all data
+	 */
 	@DeleteMapping("/erase")
 	void eraseWeatherDataBulk() {
 		weatherService.eraseWeatherDataService();

@@ -2,7 +2,6 @@ package com.travel.weather.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +9,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import com.travel.weather.util.TestUtil;
 
+/* 
+ * This class is used for end to end integration testing 
+ */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class WebApplicationTest {
 	@LocalServerPort
@@ -35,6 +34,9 @@ public class WebApplicationTest {
 
 	private static final ObjectMapper mapper = new ObjectMapper();
 
+	/* 
+	 * This method contains all the scenarios for integration testing
+	 */
 	@Test
 	public void testWorkflow() throws Exception {
 		//Create data 
